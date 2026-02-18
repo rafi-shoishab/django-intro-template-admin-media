@@ -317,6 +317,55 @@ This project helps you learn:
 
 ---
 
+## 🔧 Git Workflow (Quick Guide)
+
+### First Time Setup
+
+```
+git init
+git add .
+git commit -m "initial commit"
+git remote add origin https://github.com/rafi-shoishab/django-intro-template.git
+git branch -M main
+git push -u origin main
+```
+
+---
+
+### Daily Development Workflow
+
+```
+git pull
+git add .
+git commit -m "update message"
+git push
+```
+
+---
+
+### Pro habit (always follow)
+
+git pull
+``` edit files ```
+git add .
+git commit -m "update"
+git push
+
+
+### Recommended `.gitignore`
+
+```
+.venv/
+venv/
+__pycache__/
+*.pyc
+db.sqlite3
+.DS_Store
+.vscode/
+```
+
+---
+
 # 👨‍💻 Author
 
 Rafiur Rahman Shoishab
