@@ -345,12 +345,13 @@ git push
 
 ### Pro habit (always follow)
 
+```
 git pull
-``` edit files ```
+edit files 
 git add .
 git commit -m "update"
 git push
-
+```
 
 ### Recommended `.gitignore`
 
