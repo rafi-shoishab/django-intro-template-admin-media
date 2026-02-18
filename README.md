@@ -1,25 +1,25 @@
 # Django Intro Template 🚀
 
-A beginner-friendly Django project to understand the fundamentals of Django web development, including:
+This project demonstrates the basic workflow of Django:
 
 * Django project setup
 * HTTP response handling
 * URL routing
 * Template rendering (HTML)
-* Basic Django structure
+* Django request → response flow
 
-This project is created for learning how Django handles requests and returns responses.
+This is a beginner-friendly project to understand how Django works internally.
 
 ---
 
 # 📌 Project Overview
 
-This project demonstrates how:
+This project shows how:
 
-* Django processes HTTP requests
+* Django handles HTTP requests
 * Views return responses
+* URLs connect to views
 * Templates render HTML pages
-* URL routing connects views and templates
 
 ---
 
@@ -28,31 +28,31 @@ This project demonstrates how:
 ```
 django-intro-template/
 │
-├── core/                   # Django project configuration (settings, urls, wsgi)
+├── core/                   # Django project configuration
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
 │
 ├── navigation/             # Django app
-│   ├── views.py            # Application views
-│   ├── urls.py             # App URL routes
-│   ├── models.py
-│   └── admin.py
+│   ├── views.py
+│   ├── urls.py
+│   └── models.py
 │
-├── templates/              # HTML templates
+├── templates/
 │   └── index.html
 │
-├── static/                 # Static files (CSS)
+├── static/
 │   └── style.css
 │
-├── manage.py               # Django management script
-└── requirements.txt        # Project dependencies
+├── manage.py
+└── requirements.txt
 ```
 
 ---
 
 # ⚡ 1. Setup Django (Run Project)
 
-Follow these steps to run the project locally.
-
-## 🔹 Clone Repository
+## Clone Repository
 
 ```
 git clone https://github.com/rafi-shoishab/django-intro-template.git
@@ -61,9 +61,9 @@ cd django-intro-template
 
 ---
 
-## 🔹 Create Virtual Environment
+## Create Virtual Environment
 
-### Mac / Linux
+### Mac/Linux
 
 ```
 python3 -m venv .venv
@@ -79,7 +79,7 @@ python -m venv .venv
 
 ---
 
-## 🔹 Install Dependencies
+## Install Dependencies
 
 ```
 pip install -r requirements.txt
@@ -87,52 +87,120 @@ pip install -r requirements.txt
 
 ---
 
-## 🔹 Run Development Server
+## Run Development Server
 
 ```
 python manage.py runserver
 ```
 
-Open in browser:
+Open browser:
 
 ```
 http://127.0.0.1:8000
 ```
 
-You should see the homepage.
+---
+
+# 🌐 2. HTTP Response Implementation
+
+This section explains how to return a simple HTTP response in Django.
 
 ---
 
-# 🌐 2. HTTP Response in Django
+## Step 1 — Create Django App
 
-Django handles web requests using **views**.
+```
+python manage.py startapp navigation
+```
 
-A view receives a request and returns a response.
+---
 
-## Example: Returning a Simple HTTP Response
+## Step 2 — Register App in settings.py
+
+File: `core/settings.py`
+
+Add the app inside `INSTALLED_APPS`:
+
+```python
+INSTALLED_APPS = [
+    ...
+    'navigation',
+]
+```
+
+---
+
+## Step 3 — Create View (HTTP Response)
 
 File: `navigation/views.py`
 
-```
+```python
 from django.http import HttpResponse
 
 def hello(request):
     return HttpResponse("Hello Django")
 ```
 
-This sends a plain text response to the browser.
+This view returns a simple text response.
 
 ---
 
-# 🎨 3. Template Rendering (HTML)
+## Step 4 — Create App URL Configuration
 
-Django uses templates to render dynamic HTML pages.
+Create file: `navigation/urls.py`
 
-Templates separate frontend (HTML) from backend logic.
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('hello/', views.hello, name='hello'),
+]
+```
 
 ---
 
-## Template Location
+## Step 5 — Connect App URLs to Project URLs
+
+File: `core/urls.py`
+
+```python
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('navigation.urls')),
+]
+```
+
+---
+
+## Test HTTP Response
+
+Run server and visit:
+
+```
+http://127.0.0.1:8000/hello/
+```
+
+You will see:
+
+```
+Hello Django
+```
+
+---
+
+# 🎨 3. Template Rendering Implementation
+
+This section explains how Django renders HTML templates.
+
+---
+
+## Step 1 — Create Templates Folder
+
+Create folder structure:
 
 ```
 templates/index.html
@@ -140,28 +208,130 @@ templates/index.html
 
 ---
 
-## Rendering Template from View
+## Step 2 — Configure Template Directory in settings.py
+
+File: `core/settings.py`
+
+Update the `TEMPLATES` section:
+
+```python
+import os
+
+TEMPLATES = [
+{
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'DIRS': [os.path.join(BASE_DIR, 'templates')],
+    'APP_DIRS': True,
+    'OPTIONS': {
+        'context_processors': [
+            'django.template.context_processors.debug',
+            'django.template.context_processors.request',
+            'django.contrib.auth.context_processors.auth',
+            'django.contrib.messages.context_processors.messages',
+        ],
+    },
+},
+]
+```
+
+This tells Django where to find HTML templates.
+
+---
+
+## Step 3 — Create HTML Template
+
+File: `templates/index.html`
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Django Home</title>
+</head>
+<body>
+    <h1>Hello Django Template 🎉</h1>
+</body>
+</html>
+```
+
+---
+
+## Step 4 — Create View to Render Template
 
 File: `navigation/views.py`
 
-```
+```python
 from django.shortcuts import render
 
 def home(request):
     return render(request, "index.html")
 ```
 
-This renders the HTML file and returns it to the browser.
-
 ---
 
-## URL Routing
-
-URL routing connects a URL with a view.
+## Step 5 — Add URL Route
 
 File: `navigation/urls.py`
 
-```
+```python
 from django.urls import path
-from . im
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+]
 ```
+
+---
+
+## Test Template Rendering
+
+Run server and visit:
+
+```
+http://127.0.0.1:8000/
+```
+
+The HTML page will render.
+
+---
+
+# 🔁 Django Request → Response Flow
+
+```
+User Request
+     ↓
+URL Routing (urls.py)
+     ↓
+View Function (views.py)
+     ↓
+Template Rendering
+     ↓
+HTTP Response
+```
+
+---
+
+# 🎯 Learning Objectives
+
+This project helps you learn:
+
+* Django project setup
+* Creating Django apps
+* URL routing
+* HTTP response handling
+* Template rendering
+* Django request lifecycle
+
+---
+
+# 👨‍💻 Author
+
+Rafiur Rahman Shoishab
+GitHub: https://github.com/rafi-shoishab
+
+---
+
+# 📄 License
+
+This project is created for educational purposes.
