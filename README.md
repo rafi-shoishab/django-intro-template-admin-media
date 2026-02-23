@@ -28,20 +28,22 @@ This project helps you learn:
 
 ## 🏗 Project Structure Overview
 
-django-intro-template-admin/
-│
-├── core/ # Django project configuration
-│ ├── settings.py
-│ ├── urls.py
+django-intro-template-admin-media/
+││
+├── core/
+│ ├── settings.py # Project settings (MEDIA_ROOT, MEDIA_URL)
+│ ├── urls.py # URL routing
 │ └── wsgi.py
 │
-├── navigation/ # Django app
-│ ├── models.py # Database models
-│ ├── admin.py # Admin panel configuration
-│ ├── views.py
-│ └── urls.py
+├── navigation/
+│ ├── models.py # Students model
+│ ├── admin.py # Admin panel customization
+│ └── migrations/
 │
-├── db.sqlite3 # SQLite database
+├── media/ # Uploaded files (images)
+│
+├── templates/include # html files
+│
 ├── manage.py
 └── requirements.txt
 
