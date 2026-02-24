@@ -68,7 +68,7 @@ This project shows how:
 
 ## ⚡ 1. Setup Django (Run Project)
 
-# Clone Repository
+## Clone Repository
 ```bash
 git clone https://github.com/rafi-shoishab/django-intro-template-admin-media.git
 cd django-intro-template-admin-media
@@ -91,19 +91,22 @@ python manage.py runserver
 Open browser:
 
 http://127.0.0.1:8000
+
 ## 🌐 2. HTTP Response Implementation
 
-##Step 2.1 — Create Django App
+### Step 2.1 — Create Django App
 python manage.py startapp navigation
-# Step 2.2 — Register App
 
-# 📄 core/settings.py
+### Step 2.2 — Register App
+
+📄 core/settings.py
 
 INSTALLED_APPS = [
     ...
     'navigation',
 ]
-# Step 2.3 — Create View
+
+### Step 2.3 — Create View
 
 📄 navigation/views.py
 
@@ -111,7 +114,8 @@ from django.http import HttpResponse
 
 def hello(request):
     return HttpResponse("Hello Django")
-# Step 2.4 — App URLs
+
+### Step 2.4 — App URLs
 
 📄 navigation/urls.py
 
@@ -121,7 +125,8 @@ from . import views
 urlpatterns = [
     path('hello/', views.hello, name='hello'),
 ]
-# Step 2.5 — Project URLs
+
+### Step 2.5 — Project URLs
 
 📄 core/urls.py
 
@@ -136,9 +141,10 @@ urlpatterns = [
 Test:
 
 http://127.0.0.1:8000/hello/
+
 ## 🎨 3. Template Rendering
 
-# Step 3.1 — Create Template
+### Step 3.1 — Create Template
 
 📄 templates/index.html
 
@@ -151,7 +157,8 @@ http://127.0.0.1:8000/hello/
     <h1>Hello Django Template 🎉</h1>
 </body>
 </html>
-# Step 3.2 — Configure Templates
+
+### Step 3.2 — Configure Templates
 
 📄 core/settings.py
 
@@ -162,7 +169,8 @@ TEMPLATES = [
         ...
     },
 ]
-# Step 3.3 — Render Template
+
+### Step 3.3 — Render Template
 
 📄 navigation/views.py
 
@@ -170,6 +178,7 @@ from django.shortcuts import render
 
 def home(request):
     return render(request, "index.html")
+
 🔁 Django Request → Response Flow
 User Request
      ↓
@@ -180,18 +189,20 @@ views.py
 Template Rendering
      ↓
 HTTP Response
+
 ## 🛠 4. Django Admin Panel Exploration
 
-# Step 4.1 — Apply Migrations
+### Step 4.1 — Apply Migrations
 python manage.py migrate
 
-# Step 4.2 — Create Superuser
+### Step 4.2 — Create Superuser
 python manage.py createsuperuser
 
 Login:
 
 http://127.0.0.1:8000/admin/
-# 📦 Step 4.3 — Create Model
+
+### 📦 Step 4.3 — Create Model
 
 📄 navigation/models.py
 
@@ -209,7 +220,7 @@ class Students(models.Model):
 
     def __str__(self):
         return self.name
-# 🧩 Step 4.4 — Register Model Using Decorator
+### 🧩 Step 4.4 — Register Model Using Decorator
 
 📄 navigation/admin.py
 
@@ -225,7 +236,7 @@ class StudentsAdmin(admin.ModelAdmin):
 
 ## 🖼 5. Media (Image Upload) Configuration
 
-# Step 5.1 — Media Settings
+### Step 5.1 — Media Settings
 
 📄 core/settings.py
 
@@ -246,6 +257,7 @@ Uploaded images will be stored in:
 media/student_img/
 
 ## 🔧 Git Workflow (Quick Guide)
+
 First Time
 git add .
 git commit -m "initial commit"
@@ -264,6 +276,7 @@ db.sqlite3
 .DS_Store
 .vscode/
 media/
+
 ## 👨‍💻 Author
 
 Rafiur Rahman Shoishab
