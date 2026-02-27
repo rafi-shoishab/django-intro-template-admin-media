@@ -1,4 +1,4 @@
-# Django Intro Template 🚀 (Admin Panel & Media)
+# Django Intro 🚀 (Template, Admin Panel & Media)
 
 This project demonstrates the **basic to intermediate workflow of Django**.
 It is designed for beginners to understand how Django works internally, including
@@ -69,7 +69,7 @@ This project shows how:
 ## ⚡ 1. Setup Django (Run Project)
 
 ## Clone Repository
-```bash
+bash
 git clone https://github.com/rafi-shoishab/django-intro-template-admin-media.git
 cd django-intro-template-admin-media
 Create Virtual Environment
