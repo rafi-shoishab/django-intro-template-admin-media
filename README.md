@@ -70,8 +70,11 @@ This project shows how:
 
 ## Clone Repository
 bash
-git clone https://github.com/rafi-shoishab/django-intro-template-admin-media.git
+
+git clone https://github.com/rafi-shoishab/django-intro.git
+
 cd django-intro-template-admin-media
+
 Create Virtual Environment
 
 Mac / Linux
